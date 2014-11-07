@@ -1,0 +1,61 @@
+USE [Local1]
+GO
+/****** Object:  Table [dbo].[DailyCollection]    Script Date: 11/07/2014 15:35:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DailyCollection](
+	[CollectionRefereneNumber] [int] IDENTITY(1,1) NOT NULL,
+	[CollectionDueDate] [datetime] NULL,
+	[CollectionStatus] [varchar](15) NULL,
+	[InvoiceReferenceNumber] [numeric](9, 0) NOT NULL,
+ CONSTRAINT [PK_DailyCollection] PRIMARY KEY CLUSTERED 
+(
+	[CollectionRefereneNumber] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_DailyCollection] UNIQUE NONCLUSTERED 
+(
+	[CollectionDueDate] ASC,
+	[InvoiceReferenceNumber] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFFUSE [Local1]
+GO
+/****** Object:  Table [dbo].[DailyCollectionDetails]    Script Date: 11/07/2014 15:35:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DailyCollectionDetails](
+	[CollectionRefereneNumber] [numeric](10, 0) NOT NULL,
+	[CollectionReferenceSubNumber] [numeric](3, 0) NOT NULL,
+	[CollectionDate] [datetime] NULL,
+	[PartyReferenceBank] [varchar](50) NULL,
+	[SupplierId] [numeric](9, 0) NULL,
+	[SupplierAccountNumber] [varchar](50) NULL,
+	[DeferredDate] [datetime] NULL,
+	[PaidAmount] [numeric](10, 2) NULL,
+	[Location] [char](15) NULL,
+	[LedgerPageNumber] [numeric](9, 0) NOT NULL,
+ CONSTRAINT [PK_DailyCollectionDetails] PRIMARY KEY CLUSTERED 
+(
+	[CollectionRefereneNumber] ASC,
+    [CollectionReferenceSubNumber] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_DailyCollectionDetails] UNIQUE NONCLUSTERED 
+(
+	[CollectionDate] ASC,
+	[Location] ASC,
+    [LedgerPageNumber] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
